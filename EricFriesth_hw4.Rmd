@@ -1,0 +1,67 @@
+---
+title: "EricFriesth_hw4"
+author: "Eric Friesth"
+date: "10/29/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+## Liquor Sales in Iowa 
+
+### Part 1
+
+```{r}
+
+if (file.exists("alcohol.rds")) {
+  data <- readRDS("alcohol.rds")
+} else {
+  url <- "https://github.com/lbchu/ds202_labs/raw/master/ames.csv"
+  data <- readr::read_csv(url)
+  saveRDS(data, file="alcohol.rds")
+} 
+
+```
+
+### Part 2 Data Cleaning
+
+```{r}
+
+print(data, width = Inf)
+
+names(data)
+
+```
+
+Replace current column names to be the same names but replacing the spaces (" ") with an underscore ("_")
+
+```{r}
+
+names(data) = sub(" ", "_", names(data)) # replaces the first space in the column name with "_"
+names(data) = sub(" ", "_", names(data)) # replaces the second space in the column name with "_"
+
+names(data) # show the updated column names
+
+```
+
+Split geographic latitute and longitude from the variable Store_Location
+
+```{r}
+library(dplyr)
+library (tidyverse)
+data %>% select("Store_Location")
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
