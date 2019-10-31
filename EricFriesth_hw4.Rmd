@@ -84,7 +84,6 @@ Extract the Year, Month, and Day from variable Date
 date_split = strsplit(as.character(dataClean$Date), split = "/") # splits the date column into three separate ones off the character "/"
 dataClean = transform(dataClean, Month = sapply(date_split, "[", 1), Day = sapply(date_split, "[", 2), Year = sapply(date_split, "[", 3))
 
-dataClean = dataClean[-2]
 
 ```
 
@@ -100,13 +99,26 @@ ggplot(dataClean, aes(x = Latitude, y = Longitude)) + geom_point() + labs(title 
 
 ```
 
-Scatterplot of Liquor Category by its Volume Sold (Gallons)
+Bar plot of Liquor Category by its Volume Sold (Gallons)
 
 ```{r}
 
-ggplot(dataClean, aes(x = Category_Name, y = Volume_Sold_.Gallons.)) + geom_bar(stat = "identity") + theme(axis.text.x = element_text(angle = 90, hjust = 1))
+ggplot(dataClean, aes(x = Category_Name, y = Volume_Sold_.Gallons.)) + geom_bar(stat = "identity") + theme(axis.text.x = element_text(angle = 90, hjust = 1, size = 3)) + labs(title = "Bar Plot of Volume sold by the Liquor Category Name", x = "Liquor Category Name", y = "Volume Sold (Gallons)")
 
 ```
+
+### Part 4
+
+Daily liquor sales in Ames in 2018
+
+```{r}
+
+data2018 = subset(dataClean, Year == "2018")
+
+ggplot(data2018, aes(x = Date, y = Sale_.Dollars.)) + geom_bar(stat = "identity") + theme(axis.text.x = element_text(angle = 90, hjust = 1, size = 4))
+
+```
+
 
 
 
