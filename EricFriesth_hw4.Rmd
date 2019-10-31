@@ -90,9 +90,21 @@ dataClean = dataClean[-2]
 
 ### Part 3 First OVerview
 
+Scatterplot of Latitude and Longitude of store locations
+
 ```{r}
 
+library(ggplot2)
 
+ggplot(dataClean, aes(x = Latitude, y = Longitude)) + geom_point() + labs(title = "Scatterplot of Latitude by Longitude", x = "Latitude", y = "Longitude")
+
+```
+
+Scatterplot of Liquor Category by its Volume Sold (Gallons)
+
+```{r}
+
+ggplot(dataClean, aes(x = Category_Name, y = Volume_Sold_.Gallons.)) + geom_bar(stat = "identity") + theme(axis.text.x = element_text(angle = 90, hjust = 1))
 
 ```
 
