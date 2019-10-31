@@ -113,9 +113,29 @@ Daily liquor sales in Ames in 2018
 
 ```{r}
 
-data2018 = subset(dataClean, Year == "2018")
+data2018 = subset(dataClean, Year == "2018") # subset dataClean to just include entries from 2018
 
-ggplot(data2018, aes(x = Date, y = Sale_.Dollars.)) + geom_bar(stat = "identity") + theme(axis.text.x = element_text(angle = 90, hjust = 1, size = 4))
+ggplot(data2018, aes(x = Day, y = Volume_Sold_.Gallons.)) + geom_point() + facet_wrap(~Month) + labs(title = "Scatterplot of Liquor Volume Sold by Day of the Month in 2018", x = "Day of the Month", y = "Volume of Liquor Sold (Gallon)") + theme(axis.text.x = element_text(angle = 90, hjust = 1, size = 4)) # scatterplot of liquor volume sold by day by month in 2018
+
+ggplot(data2018, aes(x = Day, y = Sale_.Dollars.)) + geom_point() + facet_wrap(~Month) + labs(title = "Scatterplot of Sales by Day of the Month in 2018", x = "Day of the Month", y = "Sales (Dollars)") + theme(axis.text.x = element_text(angle = 90, hjust = 1, size = 4)) # scatterplot of sales by day by month in 2018
+
+ggplot(data2018, aes(x = Day, y = Bottles_Sold)) + geom_point() + facet_wrap(~Month) + labs(title = "Scatterplot of Number of Sales by Day of the Month in 2018", x = "Day of the Month", y = "Number of Sales (Number of Bottles Sold)") + theme(axis.text.x = element_text(angle = 90, hjust = 1, size = 4)) # scatterplot of number of sales by day by month in 2018
+
+```
+
+Is there a pattern between Liquor Sales and ISU Football Games?
+
+```{r}
+
+
+
+```
+
+### Part 5
+
+```{r}
+
+
 
 ```
 
