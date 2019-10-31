@@ -38,23 +38,63 @@ Replace current column names to be the same names but replacing the spaces (" ")
 
 ```{r}
 
-names(data) = sub(" ", "_", names(data)) # replaces the first space in the column name with "_"
-names(data) = sub(" ", "_", names(data)) # replaces the second space in the column name with "_"
+dataClean = data
 
-names(data) # show the updated column names
+names(dataClean) = sub(" ", "_", names(dataClean)) # replaces the first space in the column name with "_"
+names(dataClean) = sub(" ", "_", names(dataClean)) # replaces the second space in the column name with "_"
+
+names(dataClean) # show the updated column names
 
 ```
 
-Split geographic latitute and longitude from the variable Store_Location
+Split geographic latitute and longitude from the variable Store_Location using strsplit()
 
 ```{r}
 library(dplyr)
 library (tidyverse)
-data %>% select("Store_Location")
+
+loc_split = strsplit(as.character(dataClean$Store_Location), split = " ") # split the Store Location column 
+dataClean = transform(dataClean, Point = sapply(loc_split, "[", 1), Latitude = sapply(loc_split, "[", 2), Longitude = sapply(loc_split, "[", 3))
+
+dataClean = dataClean[-8] # drop column Store_Location
+dataClean = dataClean[-24] # drop column Point
+
+dataClean$Latitude = gsub("\\(", "", dataClean$Latitude) # removed "(" from all rows in column Latitude
+dataClean$Longitude = gsub("\\)", "", dataClean$Longitude) # removed ")" from all rows in column Longitude
+dataClean$Invoice.Item_Number = gsub("INV-", "", dataClean$Invoice.Item_Number) # removed "INV-" from all rows in column Invoice.Item_Number
 
 ```
 
+Checking and changing datatype of variables
 
+```{r}
+
+str(dataClean) # a look into the datatypes of each column
+
+dataClean = transform(dataClean, Invoice.Item_Number = as.numeric(Invoice.Item_Number), Vendor_Number = as.numeric(Vendor_Number), Latitude = as.numeric(Latitude), Longitude = as.numeric(Longitude))
+
+str(dataClean) # observe the new datatypes
+
+```
+
+Extract the Year, Month, and Day from variable Date
+
+```{r}
+
+date_split = strsplit(as.character(dataClean$Date), split = "/") # splits the date column into three separate ones off the character "/"
+dataClean = transform(dataClean, Month = sapply(date_split, "[", 1), Day = sapply(date_split, "[", 2), Year = sapply(date_split, "[", 3))
+
+dataClean = dataClean[-2]
+
+```
+
+### Part 3 First OVerview
+
+```{r}
+
+
+
+```
 
 
 
