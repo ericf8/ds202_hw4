@@ -107,7 +107,7 @@ ggplot(dataClean, aes(x = Category_Name, y = Volume_Sold_.Gallons.)) + geom_bar(
 
 ```
 
-### Part 4
+### Part 4 
 
 Daily liquor sales in Ames in 2018
 
@@ -123,15 +123,16 @@ ggplot(data2018, aes(x = Day, y = Bottles_Sold)) + geom_point() + facet_wrap(~Mo
 
 ```
 
-Is there a pattern between Liquor Sales and ISU Football Games?
+#### Is there a pattern between Liquor Sales and ISU Football Games?
 
-```{r}
+- From these scatterplots, we can see that during the football season months there are spikes in
+liquor sales before those gamedays. This pattern could also be due to there being a high correlation
+in liquor sales on weekends, when games typically take place.
 
-
-
-```
 
 ### Part 5
+
+Lubridate Package
 
 ```{r}
 
