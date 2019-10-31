@@ -6,7 +6,7 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(echo = TRUE)
 ```
 ## Liquor Sales in Iowa 
 
@@ -28,7 +28,8 @@ if (file.exists("alcohol.rds")) {
 
 ```{r}
 
-print(data, width = Inf)
+print(head(data, width = Inf))
+#print(data, width = Inf)
 
 names(data)
 
@@ -103,7 +104,7 @@ Bar plot of Liquor Category by its Volume Sold (Gallons)
 
 ```{r}
 
-ggplot(dataClean, aes(x = Category_Name, y = Volume_Sold_.Gallons.)) + geom_bar(stat = "identity") + theme(axis.text.x = element_text(angle = 90, hjust = 1, size = 3)) + labs(title = "Bar Plot of Volume sold by the Liquor Category Name", x = "Liquor Category Name", y = "Volume Sold (Gallons)")
+ggplot(dataClean, aes(x = Category_Name, y = Volume_Sold_.Gallons.)) + geom_bar(stat = "identity") + theme(axis.text.x = element_text(angle = 90, hjust = 1, size = 3)) + labs(title = "Bar Plot of Volume sold by the Liquor Category Name", x = "Liquor Category Name", y = "Volume Sold (Gallons)") # bar plot containing the volume of liquor sold by the category name of that liquor
 
 ```
 
@@ -136,7 +137,11 @@ Lubridate Package
 
 ```{r}
 
+library(lubridate) 
 
+dataClean$Date = mdy(dataClean$Date) # the lubridate package has a function "mdy" meaning Month Day Year to convert the chr type Date to a Date type Date column
+
+str(dataClean) # call the structure of dataClean to see the datatype change of date
 
 ```
 
